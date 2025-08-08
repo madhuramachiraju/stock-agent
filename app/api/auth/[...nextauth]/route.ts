@@ -1,6 +1,6 @@
-import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import AppleProvider from "next-auth/providers/apple";
+import NextAuth from "@auth/nextjs";
+import Google from "@auth/core/providers/google";
+import Apple from "@auth/core/providers/apple";
 
 // Check if OAuth credentials are configured
 const isGoogleConfigured = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET;
@@ -11,7 +11,7 @@ const providers = [];
 // Only add providers if credentials are configured
 if (isGoogleConfigured) {
   providers.push(
-    GoogleProvider({
+    Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       authorization: {
@@ -27,7 +27,7 @@ if (isGoogleConfigured) {
 
 if (isAppleConfigured) {
   providers.push(
-    AppleProvider({
+    Apple({
       clientId: process.env.APPLE_CLIENT_ID!,
       clientSecret: process.env.APPLE_CLIENT_SECRET!,
     })
